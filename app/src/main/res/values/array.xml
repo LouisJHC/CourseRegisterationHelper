@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Major">
+        <item>Computing Science</item>
+        <item>Actuarial Science</item>
+        <item>Anthropology</item>
+        <item>Archaeology </item>
+        <item>Biological Sciences</item>
+        <item>Business</item>
+        <item>Chemical Physics</item>
+        <item>Chemistry </item>
+        <item>Cognitive Science</item>
+        <item>Communication </item>
+        <item>Computing Science</item>
+        <item>Criminology </item>
+        <item>Earth Sciences </item>
+        <item>Economics</item>
+        <item>Engineering Science </item>
+        <item>English</item>
+        <item>Environmental Science</item>
+        <item>First Nations Studies </item>
+        <item>French </item>
+        <item>Geography </item>
+        <item>Health Sciences </item>
+        <item>History</item>
+        <item>Humanities </item>
+        <item>Interactive Arts and Technology</item>
+        <item>International Studies</item>
+        <item>Kinesiology</item>
+        <item>Linguistics</item>
+        <item>Mathematics</item>
+        <item>Mechatronic Systems Engineering</item>
+        <item>Philosophy</item>
+        <item>Physics</item>
+        <item>Political Science</item>
+        <item>Psychology</item>
+        <item>Sociology</item>
+        <item>Software Systems</item>
+        <item>Statistics</item>
+    </string-array>
+
+
+</resources>
