@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 
 /**
@@ -60,6 +64,38 @@ public class CoursesFragment extends Fragment {
         }
     }
 
+    private String courseSchool = " ";
+    private String  courseYr = "", courseSem = "", courseStat= "";
+    private ArrayAdapter yrAdapter, semAdapter, statAdapter;
+    private Spinner yrSpinner, semSpinner, statSpinner;
+
+
+    @Override
+    public void onActivityCreated(Bundle b) {
+        super.onActivityCreated(b);
+        yrSpinner = (Spinner) getView().findViewById(R.id.yrSpinner);
+        semSpinner = (Spinner) getView().findViewById(R.id.semSpinner);
+        statSpinner = (Spinner) getView().findViewById(R.id.statSpinner);
+        final RadioGroup courseSchoolGroup = (RadioGroup) getView().findViewById(R.id.courseSchool);
+        courseSchoolGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton courseButton = (RadioButton) getView().findViewById(checkedId);
+                courseSchool = courseButton.getText().toString();
+
+                yrAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.year, android.R.layout.simple_spinner_dropdown_item);
+                yrSpinner.setAdapter(yrAdapter);
+
+                semAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.semester, android.R.layout.simple_spinner_dropdown_item);
+                semSpinner.setAdapter(semAdapter);
+
+                statAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.status, android.R.layout.simple_spinner_dropdown_item);
+                statSpinner.setAdapter(statAdapter);
+            }
+        });
+
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

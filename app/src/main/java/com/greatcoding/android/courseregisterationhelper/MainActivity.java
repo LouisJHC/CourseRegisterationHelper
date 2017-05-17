@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout linear;
@@ -66,5 +67,17 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.fragment, fragment3).commit();
             }
         });
+    }
+
+    private long lastTimeBackPressed;
+
+    @Override
+    public void onBackPressed(){
+        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+            finish();
+            return;
+        }
+        Toast.makeText(this, "Please press back button one more time to finish application", Toast.LENGTH_SHORT);
+        lastTimeBackPressed = System.currentTimeMillis();
     }
 }

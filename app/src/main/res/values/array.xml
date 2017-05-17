@@ -39,5 +39,23 @@
         <item>Statistics</item>
     </string-array>
 
+    <string-array name="year">
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+    </string-array>
+    <string-array name="semester">
+        <item>Spring Semester</item>
+        <item>Summer Semester</item>
+        <item>Fall Semester</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>Major</item>
+        <item>Electives</item>
+
+    </string-array>
+
 
 </resources>

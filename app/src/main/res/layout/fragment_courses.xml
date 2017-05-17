@@ -1,20 +1,108 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.greatcoding.android.courseregisterationhelper.CoursesFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+   <RadioGroup
+       android:id="@+id/courseSchool"
+       android:layout_width="300dp"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="9dp"
+       android:layout_gravity="center_horizontal"
+       >
+
+
+       <RadioButton
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="Undergraduate"
+           android:id="@+id/undergraduate"
+           android:layout_marginRight="20dp"
+
+           />
+
+       <RadioButton
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="Graduate"
+           android:id="@+id/graduate"
+
+           />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="9dp">
+        <Spinner
+            android:id="@+id/majSpinner"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_gravity="center"
+
+            />
+
+        <Button
+            android:layout_width="75dp"
+            android:layout_height="45dp"
+            android:text="Search"
+            android:layout_marginLeft="10dp"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:background="@color/color3"
+            android:id="@+id/searchButton"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:paddingRight="9dp"
+        android:gravity="center">
+
+    <Spinner
+        android:id="@+id/yrSpinner"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/semSpinner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_gravity="center"
+            />
+        <Spinner
+            android:id="@+id/statSpinner"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_gravity="center"
+
+            />
+        </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/list"/>
+        android:layout_margin="10dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go Back"
-        android:layout_marginTop="20dp"
-        android:id="@+id/goBack"/>
 
-</FrameLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="9dp"
+            android:id="@+id/courseListView"/>
+    </LinearLayout>
+
+</LinearLayout>
