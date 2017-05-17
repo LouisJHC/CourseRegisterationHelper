@@ -24,8 +24,8 @@ public class RegistrationRequest extends StringRequest {
         parameters.put("userEmail", userEmail);
     }
 
-
-    public Map<String, String> getParameters(){
+    @Override
+    public Map<String, String> getParams(){
         return parameters;
     }
 }

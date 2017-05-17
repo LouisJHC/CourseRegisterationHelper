@@ -20,8 +20,8 @@ public class ValidationRequest extends StringRequest {
         parameters.put("userID", userID);
     }
 
-
-    public Map<String, String> getParameters(){
+    @Override
+    public Map<String, String> getParams(){
         return parameters;
     }
 }

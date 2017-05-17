@@ -119,7 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
 
                 }
-
                 if(userID.equals("")||userPassword.equals("")||userMajor.equals("")||userGender.equals("")||userEmail.equals("")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     dialog = builder.setMessage("Please fill all the criteria.").setNegativeButton("Confirm", null).create();
