@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -25,6 +26,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.greatcoding.android.courseregisterationhelper.R.id.courseListView;
 
 
 /**
@@ -77,11 +82,15 @@ public class CoursesFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    AlertDialog dialog;
+    AlertDialog.Builder builder;
     private String courseSchool = " ";
     private String  courseYr = " ", courseSemester = " ", courseMajor= " ";
     private ArrayAdapter yrAdapter, semAdapter, majAdapter;
     private Spinner yrSpinner, semSpinner, majSpinner;
+    private ListView coursesListView;
+    private CoursesListAdapter adapter;
+    private List<CoursesMain> coursesList;
 
 
     @Override
@@ -116,6 +125,13 @@ public class CoursesFragment extends Fragment {
             }
 
         });
+
+        coursesListView = (ListView) getView().findViewById(R.id.courseListView);
+        coursesList = new ArrayList<CoursesMain>();
+        adapter = new CoursesListAdapter(getContext().getApplicationContext(), coursesList);
+        coursesListView.setAdapter(adapter);
+
+
         Button searchButton = (Button) getView().findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,10 +201,10 @@ public class CoursesFragment extends Fragment {
                 HttpURLConnection httpURLConnection= (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String tmp;
+                String temp;
                 StringBuilder stringBuilder = new StringBuilder();
-                while((tmp = bufferedReader.readLine()) != null){
-                    stringBuilder.append(tmp + "\n");
+                while((temp = bufferedReader.readLine()) != null){
+                    stringBuilder.append(temp + "\n");
                 }
                 bufferedReader.close();
                 inputStream.close();
@@ -211,11 +227,37 @@ public class CoursesFragment extends Fragment {
         @Override
         public void onPostExecute(String result){
             try{
-                AlertDialog dialog;
-                AlertDialog.Builder builder = new AlertDialog.Builder(CoursesFragment.this.getContext());
-                dialog = builder.setMessage(result).setPositiveButton("Confirm", null).create();
-                dialog.show();
+                coursesList.clear();
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("response");
+                int temp =0;
+                String courseSemester;
+                String courseName;
+                String courseTitle;
+                String courseSeats;
+                String courseProf;
+                String courseCampus;
 
+                while(temp < jsonArray.length()){
+                    JSONObject object = jsonArray.getJSONObject(temp);
+                    courseSemester = object.getString("courseSemester");
+                    courseName = object.getString("courseName");
+                    courseTitle = object.getString("courseTitle");
+                    courseSeats = object.getString("courseSeats");
+                    courseProf = object.getString("courseProf");
+                    courseCampus = object.getString("courseCampus");
+                    CoursesMain courses = new CoursesMain(courseSemester, courseName, courseTitle, courseSeats, courseProf, courseCampus);
+                    coursesList.add(courses);
+                    temp++;
+                }
+
+                if(temp == 0){
+                    builder = new AlertDialog.Builder(CoursesFragment.this.getActivity());
+                    dialog = builder.setMessage("There is no class").setPositiveButton("Confirm", null).create();
+                    dialog.show();
+                }
+
+                adapter.notifyDataSetChanged();
             }catch(Exception e){
                 e.printStackTrace();
             }
