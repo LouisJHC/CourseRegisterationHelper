@@ -2,15 +2,29 @@ package com.greatcoding.android.courseregisterationhelper;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 
 /**
@@ -65,17 +79,18 @@ public class CoursesFragment extends Fragment {
     }
 
     private String courseSchool = " ";
-    private String  courseYr = "", courseSem = "", courseStat= "";
-    private ArrayAdapter yrAdapter, semAdapter, statAdapter;
-    private Spinner yrSpinner, semSpinner, statSpinner;
+    private String  courseYr = " ", courseSemester = " ", courseMajor= " ";
+    private ArrayAdapter yrAdapter, semAdapter, majAdapter;
+    private Spinner yrSpinner, semSpinner, majSpinner;
 
 
     @Override
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
+
         yrSpinner = (Spinner) getView().findViewById(R.id.yrSpinner);
         semSpinner = (Spinner) getView().findViewById(R.id.semSpinner);
-        statSpinner = (Spinner) getView().findViewById(R.id.statSpinner);
+        majSpinner = (Spinner) getView().findViewById(R.id.majSpinner);
         final RadioGroup courseSchoolGroup = (RadioGroup) getView().findViewById(R.id.courseSchool);
         courseSchoolGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -83,14 +98,29 @@ public class CoursesFragment extends Fragment {
                 RadioButton courseButton = (RadioButton) getView().findViewById(checkedId);
                 courseSchool = courseButton.getText().toString();
 
+                if(courseSchool.equals("Undergraduate")){
+                    majAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.Major, android.R.layout.simple_spinner_dropdown_item);
+                    majSpinner.setAdapter(majAdapter);
+                }else if (courseSchool.equals("Graduate")){
+                    majAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.graduateMajor, android.R.layout.simple_spinner_dropdown_item);
+                    majSpinner.setAdapter(majAdapter);
+                }
+
+
                 yrAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.year, android.R.layout.simple_spinner_dropdown_item);
                 yrSpinner.setAdapter(yrAdapter);
 
                 semAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.semester, android.R.layout.simple_spinner_dropdown_item);
                 semSpinner.setAdapter(semAdapter);
 
-                statAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.status, android.R.layout.simple_spinner_dropdown_item);
-                statSpinner.setAdapter(statAdapter);
+            }
+
+        });
+        Button searchButton = (Button) getView().findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new BackgroundTask().execute();
             }
         });
 
@@ -109,6 +139,7 @@ public class CoursesFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
 
 
@@ -132,4 +163,68 @@ public class CoursesFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    class BackgroundTask extends AsyncTask<Void, Void, String>
+    {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                target = "http://matched-excuses.000webhostapp.com/ListofCourses.php?courseMajor=" + URLEncoder.encode(majSpinner.getSelectedItem().toString(), "UTF-8") + "&courseYear=" + URLEncoder.encode(yrSpinner.getSelectedItem().toString(), "UTF-8")
+                        + "&courseSemester =" + URLEncoder.encode(semSpinner.getSelectedItem().toString(), "UTF-8");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(Void... voids){
+            try{
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection= (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String tmp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while((tmp = bufferedReader.readLine()) != null){
+                    stringBuilder.append(tmp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+
+            } catch(Exception e){
+                e.printStackTrace();
+
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values){
+            super.onProgressUpdate();
+        }
+
+
+        @Override
+        public void onPostExecute(String result){
+            try{
+                AlertDialog dialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(CoursesFragment.this.getContext());
+                dialog = builder.setMessage(result).setPositiveButton("Confirm", null).create();
+                dialog.show();
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
+
+
+
+

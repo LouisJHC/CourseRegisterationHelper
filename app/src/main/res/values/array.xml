@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="Major">
         <item>Computing Science</item>
         <item>Actuarial Science</item>
@@ -39,6 +40,37 @@
         <item>Statistics</item>
     </string-array>
 
+        <string-array name="graduateMajor">
+            <item>Computing Science</item>
+            <item>Engineering Science </item>
+            <item>Mechatronic Systems Engineering</item>
+            <item>Economics </item>
+            <item>English</item>
+            <item>French</item>
+            <item>History </item>
+            <item>Humanities</item>
+            <item>Linguistics</item>
+            <item>Philosophy</item>
+            <item>Political Science</item>
+            <item>Psychology</item>
+            <item>Sociology and Anthropology</item>
+            <item>International Studies</item>
+            <item>Criminology</item>
+            <item>Archaeology</item>
+            <item>Geography</item>
+            <item>Bioinformatics</item>
+            <item>Biological Sciences</item>
+            <item>Statistics</item>
+            <item>Chemistry</item>
+            <item>Earth Sciences</item>
+            <item>Mathematics</item>
+            <item>Molecular Biology and Biochemistry</item>
+            <item>Physics</item>
+            <item> Interactive Arts and Technology</item>
+        </string-array>
+
+
+
     <string-array name="year">
         <item>2017</item>
         <item>2018</item>
@@ -49,12 +81,6 @@
         <item>Spring Semester</item>
         <item>Summer Semester</item>
         <item>Fall Semester</item>
-    </string-array>
-
-    <string-array name="status">
-        <item>Major</item>
-        <item>Electives</item>
-
     </string-array>
 
 

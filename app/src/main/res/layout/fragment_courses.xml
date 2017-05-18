@@ -69,27 +69,22 @@
         android:paddingRight="9dp"
         android:gravity="center">
 
-    <Spinner
+
+        <Spinner
         android:id="@+id/yrSpinner"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="9dp"
         android:layout_gravity="center"/>
+
         <Spinner
             android:id="@+id/semSpinner"
-            android:layout_width="100dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="9dp"
             android:layout_gravity="center"
             />
-        <Spinner
-            android:id="@+id/statSpinner"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="9dp"
-            android:layout_gravity="center"
 
-            />
         </LinearLayout>
 
     <LinearLayout
