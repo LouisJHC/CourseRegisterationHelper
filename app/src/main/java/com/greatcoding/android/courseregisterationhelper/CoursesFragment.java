@@ -84,10 +84,10 @@ public class CoursesFragment extends Fragment {
     }
     AlertDialog dialog;
     AlertDialog.Builder builder;
-    private String courseSchool = " ";
-    private String  courseYr = " ", courseSemester = " ", courseMajor= " ";
-    private ArrayAdapter yrAdapter, semAdapter, majAdapter;
-    private Spinner yrSpinner, semSpinner, majSpinner;
+    private String courseSchool = "";
+    private String courseSemester = "", courseName= "", courseCampus;
+    private ArrayAdapter semAdapter, majAdapter, campusAdapter;
+    private Spinner semSpinner, majSpinner, campusSpinner;
     private ListView coursesListView;
     private CoursesListAdapter adapter;
     private List<CoursesMain> coursesList;
@@ -97,7 +97,7 @@ public class CoursesFragment extends Fragment {
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        yrSpinner = (Spinner) getView().findViewById(R.id.yrSpinner);
+        campusSpinner = (Spinner) getView().findViewById(R.id.campusSpinner);
         semSpinner = (Spinner) getView().findViewById(R.id.semSpinner);
         majSpinner = (Spinner) getView().findViewById(R.id.majSpinner);
         final RadioGroup courseSchoolGroup = (RadioGroup) getView().findViewById(R.id.courseSchool);
@@ -107,20 +107,16 @@ public class CoursesFragment extends Fragment {
                 RadioButton courseButton = (RadioButton) getView().findViewById(checkedId);
                 courseSchool = courseButton.getText().toString();
 
-                if(courseSchool.equals("Undergraduate")){
-                    majAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.Major, android.R.layout.simple_spinner_dropdown_item);
+                    majAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.courses, android.R.layout.simple_spinner_dropdown_item);
                     majSpinner.setAdapter(majAdapter);
-                }else if (courseSchool.equals("Graduate")){
-                    majAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.graduateMajor, android.R.layout.simple_spinner_dropdown_item);
-                    majSpinner.setAdapter(majAdapter);
-                }
 
 
-                yrAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.year, android.R.layout.simple_spinner_dropdown_item);
-                yrSpinner.setAdapter(yrAdapter);
+                    semAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.semester, android.R.layout.simple_spinner_dropdown_item);
+                    semSpinner.setAdapter(semAdapter);
 
-                semAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.semester, android.R.layout.simple_spinner_dropdown_item);
-                semSpinner.setAdapter(semAdapter);
+                    campusAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.campus, android.R.layout.simple_spinner_dropdown_item);
+                    campusSpinner.setAdapter(campusAdapter);
+
 
             }
 
@@ -187,8 +183,9 @@ public class CoursesFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             try {
-                target = "http://matched-excuses.000webhostapp.com/ListofCourses.php?courseMajor=" + URLEncoder.encode(majSpinner.getSelectedItem().toString(), "UTF-8") + "&courseYear=" + URLEncoder.encode(yrSpinner.getSelectedItem().toString(), "UTF-8")
-                        + "&courseSemester =" + URLEncoder.encode(semSpinner.getSelectedItem().toString(), "UTF-8");
+                target = "http://matched-excuses.000webhostapp.com/ListofCourses1.php?courseSemester=" + URLEncoder.encode(semSpinner.getSelectedItem().toString())
+                        + "&courseName=" + URLEncoder.encode(majSpinner.getSelectedItem().toString())
+                        + "&courseCampus=" + URLEncoder.encode(campusSpinner.getSelectedItem().toString());
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -230,7 +227,7 @@ public class CoursesFragment extends Fragment {
                 coursesList.clear();
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("response");
-                int temp =0;
+                int temp = 0;
                 String courseSemester;
                 String courseName;
                 String courseTitle;

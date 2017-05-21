@@ -71,7 +71,7 @@
 
 
         <Spinner
-        android:id="@+id/yrSpinner"
+        android:id="@+id/campusSpinner"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="9dp"

@@ -40,47 +40,40 @@
         <item>Statistics</item>
     </string-array>
 
-        <string-array name="graduateMajor">
-            <item>Computing Science</item>
-            <item>Engineering Science </item>
-            <item>Mechatronic Systems Engineering</item>
-            <item>Economics </item>
-            <item>English</item>
-            <item>French</item>
-            <item>History </item>
-            <item>Humanities</item>
-            <item>Linguistics</item>
-            <item>Philosophy</item>
-            <item>Political Science</item>
-            <item>Psychology</item>
-            <item>Sociology and Anthropology</item>
-            <item>International Studies</item>
-            <item>Criminology</item>
-            <item>Archaeology</item>
-            <item>Geography</item>
-            <item>Bioinformatics</item>
-            <item>Biological Sciences</item>
-            <item>Statistics</item>
-            <item>Chemistry</item>
-            <item>Earth Sciences</item>
-            <item>Mathematics</item>
-            <item>Molecular Biology and Biochemistry</item>
-            <item>Physics</item>
-            <item> Interactive Arts and Technology</item>
-        </string-array>
+    <string-array name="courses">
+        <item>ACMA</item>
+        <item>ALS</item>
+        <item>APMA</item>
+        <item>ARAB</item>
+        <item>ARCH</item>
+        <item>ASC</item>
+        <item>BISC</item>
+        <item>BOT</item>
+        <item>BPK</item>
+        <item>BUEC</item>
+        <item>BUS</item>
+        <item>CA</item>
+        <item>CHEM</item>
+        <item>CHIN</item>
+        <item>CMNS</item>
+        <item>CMPT</item>
+        <item>COGS</item>
 
 
 
-    <string-array name="year">
-        <item>2017</item>
-        <item>2018</item>
-        <item>2019</item>
-        <item>2020</item>
+    </string-array>
+
+
+    <string-array name="campus">
+        <item>Burnaby</item>
+        <item>Surrey</item>
+        <item>Harbour ctr</item>
+        <item>Off-campus</item>
     </string-array>
     <string-array name="semester">
-        <item>Spring Semester</item>
-        <item>Summer Semester</item>
-        <item>Fall Semester</item>
+        <item>Spring 2017</item>
+        <item>Summer 2017</item>
+        <item>Fall 2017</item>
     </string-array>
 
 
