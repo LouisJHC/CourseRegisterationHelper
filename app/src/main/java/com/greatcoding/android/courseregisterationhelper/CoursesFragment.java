@@ -124,7 +124,7 @@ public class CoursesFragment extends Fragment {
 
         coursesListView = (ListView) getView().findViewById(R.id.courseListView);
         coursesList = new ArrayList<CoursesMain>();
-        adapter = new CoursesListAdapter(getContext().getApplicationContext(), coursesList);
+        adapter = new CoursesListAdapter(getContext().getApplicationContext(), coursesList, this);
         coursesListView.setAdapter(adapter);
 
 
@@ -250,7 +250,7 @@ public class CoursesFragment extends Fragment {
 
                 if(temp == 0){
                     builder = new AlertDialog.Builder(CoursesFragment.this.getActivity());
-                    dialog = builder.setMessage("There is no class").setPositiveButton("Confirm", null).create();
+                    dialog = builder.setMessage("There is no class.").setPositiveButton("Confirm", null).create();
                     dialog.show();
                 }
 

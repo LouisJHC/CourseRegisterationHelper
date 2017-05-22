@@ -1,5 +1,6 @@
 package com.greatcoding.android.courseregisterationhelper;
 
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +16,12 @@ public class MainActivity extends AppCompatActivity {
     CoursesFragment fragment1;
     TimeFragment fragment2;
     StatFragment fragment3;
-
+    public static String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         coursesButton = (Button) findViewById(R.id.coursesButton);
         timeButton = (Button) findViewById(R.id.timeButton);
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         fragment1 = new CoursesFragment();
         fragment2 = new TimeFragment();
         fragment3 = new StatFragment();
+        userID = getIntent().getStringExtra("userID");
 
         coursesButton.setOnClickListener(new View.OnClickListener() {
             @Override
