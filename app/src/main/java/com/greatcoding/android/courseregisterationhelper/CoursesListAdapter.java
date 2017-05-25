@@ -1,6 +1,7 @@
 package com.greatcoding.android.courseregisterationhelper;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -13,8 +14,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +34,18 @@ public class CoursesListAdapter extends BaseAdapter {
     private Context context;
     private List<CoursesMain> courseList;
     private Fragment parent;
+    private Schedule schedule = new Schedule();
+    private List<String> courseNameList;
+    private String userID = MainActivity.userID;
 
 
     public CoursesListAdapter(Context context, List<CoursesMain> courseList, Fragment parent) {
         this.context = context;
         this.courseList = courseList;
         this.parent = parent;
+        schedule = new Schedule();
+        courseNameList = new ArrayList<String>();
+        new BackgroundTask().execute();
     }
 
     @Override
@@ -74,23 +89,25 @@ public class CoursesListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 String userID = MainActivity.userID;
-                Response.Listener<String> responseListener = new Response.Listener<String>(){
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response){
-                        try{
+                    public void onResponse(String response) {
+                        try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
-                            if(success) {
+                            if (success) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
                                 AlertDialog dialog = builder.setMessage("The following course is successfully added.").setPositiveButton("Confirm", null).create();
                                 dialog.show();
-                            }else {
+                                courseNameList.add(courseList.get(position).getCourseName());
+                                schedule.addSchedule(courseList.get(position).getCourseName());
+                            } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
                                 AlertDialog dialog = builder.setMessage("The following course has not been added.").setNegativeButton("Confirm", null).create();
                                 dialog.show();
 
                             }
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -101,11 +118,84 @@ public class CoursesListAdapter extends BaseAdapter {
                 queue.add(addRequest);
 
 
-
             }
 
         });
         return v;
+    }
+
+    class BackgroundTask extends AsyncTask<Void, Void, String> {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                target = "http://matched-excuses.000webhostapp.com/ListofSchedule.php?UserID=" + URLEncoder.encode(userID);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String temp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((temp = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(temp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values) {
+            super.onProgressUpdate();
+        }
+
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("response");
+                int temp = 0;
+                String courseSemester;
+                String courseName;
+                String courseTitle;
+                String courseProf;
+                String courseCampus;
+
+                while (temp < jsonArray.length()) {
+                    JSONObject object = jsonArray.getJSONObject(temp);
+                    courseSemester = object.getString("courseSemester");
+                    courseName = object.getString("courseName");
+                    courseTitle = object.getString("courseTitle");
+                    courseCampus = object.getString("courseCampus");
+                    CoursesMain courses = new CoursesMain(courseSemester, courseName, courseTitle, courseCampus);
+                    courseNameList.add(courseName);
+                    schedule.addSchedule(courseName);
+                    temp++;
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
