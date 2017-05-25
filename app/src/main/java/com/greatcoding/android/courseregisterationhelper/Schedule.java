@@ -20,67 +20,68 @@ public class Schedule {
             thirdYr[i] = "";
             fourthYr[i] = "";
 
-        }
-    }
 
-    public void addSchedule(String scheduleText) {
-        if (scheduleText.charAt(4) == '1' || scheduleText.charAt(5) == '1') {
-            for (int i = 0; i < scheduleText.length(); i++) {
-                firstYr[i] = "class";
-            }
-            if (scheduleText.charAt(4) == '2' || scheduleText.charAt(5) == '2') {
-                for (int i = 0; i < scheduleText.length(); i++) {
-                    secondYr[i] = "class";
-                }
-                if (scheduleText.charAt(4) == '3' || scheduleText.charAt(5) == '3') {
-                    for (int i = 0; i < scheduleText.length(); i++) {
-                        thirdYr[i] = "class";
-                    }
-
-                    if (scheduleText.charAt(4) == '4' || scheduleText.charAt(5) == '4') {
-                        for (int i = 0; i < scheduleText.length(); i++) {
-                            fourthYr[i] = "class";
-                        }
-                    }
-                }
-            }
         }
 
     }
+
 
 
     public void addSchedule(String scheduleText, String courseTitle, String courseCampus) {
-       String title;
-       title = "(" + courseTitle + ")";
-        if (scheduleText.charAt(4) == '1' || scheduleText.charAt(5) == '1') {
-            for (int i = 0; i < scheduleText.length(); i++) {
-                firstYr[i] = scheduleText + title + courseCampus;
-            }
-            if (scheduleText.charAt(4) == '2' || scheduleText.charAt(5) == '2') {
-                for (int i = 0; i < scheduleText.length(); i++) {
-                    secondYr[i] = scheduleText + title + courseCampus;
-                }
-                if (scheduleText.charAt(4) == '3' || scheduleText.charAt(5) == '3') {
-                    for (int i = 0; i < scheduleText.length(); i++) {
-                        thirdYr[i] = scheduleText + title + courseCampus;
-                    }
+        int num = Character.getNumericValue(scheduleText.charAt(4));
+        int num1 = Character.getNumericValue(scheduleText.charAt(5));
 
-                    if (scheduleText.charAt(4) == '4' || scheduleText.charAt(5) == '4') {
-                        for (int i = 0; i < scheduleText.length(); i++) {
-                            fourthYr[i] = scheduleText + title + courseCampus;
-                        }
-                    }
+        if (num == 1 || num1 == 1) {
+            for(int i = 0; i < 6;i++){
+                if(firstYr[i].equals("")) {
+                    firstYr[i] = scheduleText + courseTitle;
+                    break;
                 }
             }
         }
 
+
+        if (num == 2 || num1 == 2) {
+            for(int i = 0; i < 6;i++){
+                if(secondYr[i].equals("")) {
+                    secondYr[i] = scheduleText + courseTitle;
+                    break;
+                }
+            }
+        }
+
+        if (num == 3 || num1 == 3) {
+            for(int i = 0; i < 6;i++){
+                if(thirdYr[i].equals("")){
+                    thirdYr[i] = scheduleText + courseTitle;
+                    break;
+                }
+            }
+        }
+
+
+        if (num == 4 || num1 == 4) {
+            for(int i = 0; i < 6;i++){
+                if(fourthYr[i].equals("")) {
+                    fourthYr[i] = scheduleText + courseTitle;
+                    break;
+                }
+            }
+        }
+
+
+
     }
+
+
+
 
     public void showSetting(TextView[] firstYr, TextView[] secondYr, TextView[] thirdYr, TextView[] fourthYr, Context context){
         for(int i=0; i < 6; i++){
-            if(!this.firstYr[i].equals("")){
+            if(!this.firstYr[i].equals("")) {
                 firstYr[i].setText(this.firstYr[i]);
-                firstYr[i].setBackgroundColor(context.getResources().getColor(R.color.color3));
+
+                 firstYr[i].setBackgroundColor(context.getResources().getColor(R.color.color3));
             }
             if(!this.secondYr[i].equals("")){
                 secondYr[i].setText(this.secondYr[i]);

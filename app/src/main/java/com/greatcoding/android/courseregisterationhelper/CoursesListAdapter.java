@@ -35,7 +35,6 @@ public class CoursesListAdapter extends BaseAdapter {
     private List<CoursesMain> courseList;
     private Fragment parent;
     private Schedule schedule = new Schedule();
-    private List<String> courseNameList;
     private String userID = MainActivity.userID;
 
 
@@ -44,7 +43,6 @@ public class CoursesListAdapter extends BaseAdapter {
         this.courseList = courseList;
         this.parent = parent;
         schedule = new Schedule();
-        courseNameList = new ArrayList<String>();
         new BackgroundTask().execute();
     }
 
@@ -99,8 +97,8 @@ public class CoursesListAdapter extends BaseAdapter {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
                                 AlertDialog dialog = builder.setMessage("The following course is successfully added.").setPositiveButton("Confirm", null).create();
                                 dialog.show();
-                                courseNameList.add(courseList.get(position).getCourseName());
-                                schedule.addSchedule(courseList.get(position).getCourseName());
+
+
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
                                 AlertDialog dialog = builder.setMessage("The following course has not been added.").setNegativeButton("Confirm", null).create();
@@ -130,7 +128,7 @@ public class CoursesListAdapter extends BaseAdapter {
         @Override
         protected void onPreExecute() {
             try {
-                target = "http://matched-excuses.000webhostapp.com/ListofSchedule.php?UserID=" + URLEncoder.encode(userID);
+                target = "http://matched-excuses.000webhostapp.com/ListofSchedule.php?userID=" + URLEncoder.encode(userID);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -176,7 +174,6 @@ public class CoursesListAdapter extends BaseAdapter {
                 String courseSemester;
                 String courseName;
                 String courseTitle;
-                String courseProf;
                 String courseCampus;
 
                 while (temp < jsonArray.length()) {
@@ -186,8 +183,6 @@ public class CoursesListAdapter extends BaseAdapter {
                     courseTitle = object.getString("courseTitle");
                     courseCampus = object.getString("courseCampus");
                     CoursesMain courses = new CoursesMain(courseSemester, courseName, courseTitle, courseCampus);
-                    courseNameList.add(courseName);
-                    schedule.addSchedule(courseName);
                     temp++;
                 }
 

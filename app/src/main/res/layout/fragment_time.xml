@@ -91,6 +91,73 @@
                 android:textColor="#ffffff"
                 android:layout_weight="3"
                 android:background="@drawable/cell_shape"
+                android:id="@+id/firstYr0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/secondYr0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/thirdYr0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/fourthYr0"/>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color3">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:layout_weight="1"
+                android:background="@color/color3"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="right"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
                 android:id="@+id/firstYr1"/>
 
             <TextView
@@ -131,73 +198,6 @@
         </TableRow>
 
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color3">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"
-                android:layout_weight="1"
-                android:background="@color/color3"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:gravity="right"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/firstYr2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="200 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/secondYr2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="300 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/thirdYr2"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="400 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/fourthYr2"/>
-        </TableRow>
-
-
 
         <TableRow
             android:layout_width="match_parent"
@@ -227,7 +227,7 @@
                 android:textColor="#ffffff"
                 android:layout_weight="3"
                 android:background="@drawable/cell_shape"
-                android:id="@+id/firstYr3"/>
+                android:id="@+id/firstYr2"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -239,7 +239,7 @@
                 android:textColor="#ffffff"
                 android:layout_weight="3"
                 android:background="@drawable/cell_shape"
-                android:id="@+id/secondYr3"/>
+                android:id="@+id/secondYr2"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -251,11 +251,78 @@
                 android:textColor="#ffffff"
                 android:layout_weight="3"
                 android:background="@drawable/cell_shape"
-                android:id="@+id/thirdYr3"/>
+                android:id="@+id/thirdYr2"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="400 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/fourthYr2"/>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color3">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:layout_weight="1"
+                android:background="@color/color3"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="right"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/firstYr3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/secondYr3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300 level"
+                android:padding="18dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_weight="3"
+                android:background="@drawable/cell_shape"
+                android:id="@+id/thirdYr3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="400 level"
                 android:padding="18dp"
                 android:textStyle="bold"
@@ -276,7 +343,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4"
+                android:text="5"
                 android:layout_weight="1"
                 android:background="@color/color3"
                 android:textColor="#ffffff"
@@ -343,7 +410,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
+                android:text="6"
                 android:layout_weight="1"
                 android:background="@color/color3"
                 android:textColor="#ffffff"
@@ -398,73 +465,6 @@
                 android:layout_weight="3"
                 android:background="@drawable/cell_shape"
                 android:id="@+id/fourthYr5"/>
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color3">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6"
-                android:layout_weight="1"
-                android:background="@color/color3"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:gravity="right"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/firstYr6"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="200 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/secondYr6"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="300 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/thirdYr6"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="400 level"
-                android:padding="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_weight="3"
-                android:background="@drawable/cell_shape"
-                android:id="@+id/fourthYr6"/>
         </TableRow>
     </TableLayout>
 </FrameLayout>

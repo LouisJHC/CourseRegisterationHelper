@@ -82,33 +82,33 @@ public class TimeFragment extends Fragment {
     public void onActivityCreated(Bundle b){
         super.onActivityCreated(b);
 
-        firstYr[0] = (TextView) getView().findViewById(R.id.firstYr1);
-        firstYr[1] = (TextView) getView().findViewById(R.id.firstYr2);
-        firstYr[2] = (TextView) getView().findViewById(R.id.firstYr3);
-        firstYr[3] = (TextView) getView().findViewById(R.id.firstYr4);
-        firstYr[4] = (TextView) getView().findViewById(R.id.firstYr5);
-        firstYr[5] = (TextView) getView().findViewById(R.id.firstYr6);
+        firstYr[0] = (TextView) getView().findViewById(R.id.firstYr0);
+        firstYr[1] = (TextView) getView().findViewById(R.id.firstYr1);
+        firstYr[2] = (TextView) getView().findViewById(R.id.firstYr2);
+        firstYr[3] = (TextView) getView().findViewById(R.id.firstYr3);
+        firstYr[4] = (TextView) getView().findViewById(R.id.firstYr4);
+        firstYr[5] = (TextView) getView().findViewById(R.id.firstYr5);
 
-        secondYr[0] = (TextView) getView().findViewById(R.id.secondYr1);
-        secondYr[1] = (TextView) getView().findViewById(R.id.secondYr2);
-        secondYr[2] = (TextView) getView().findViewById(R.id.secondYr3);
-        secondYr[3] = (TextView) getView().findViewById(R.id.secondYr4);
-        secondYr[4] = (TextView) getView().findViewById(R.id.secondYr5);
-        secondYr[5] = (TextView) getView().findViewById(R.id.secondYr6);
+        secondYr[0] = (TextView) getView().findViewById(R.id.secondYr0);
+        secondYr[1] = (TextView) getView().findViewById(R.id.secondYr1);
+        secondYr[2] = (TextView) getView().findViewById(R.id.secondYr2);
+        secondYr[3] = (TextView) getView().findViewById(R.id.secondYr3);
+        secondYr[4] = (TextView) getView().findViewById(R.id.secondYr4);
+        secondYr[5] = (TextView) getView().findViewById(R.id.secondYr5);
 
-        thirdYr[0] = (TextView) getView().findViewById(R.id.thirdYr1);
-        thirdYr[1] = (TextView) getView().findViewById(R.id.thirdYr2);
-        thirdYr[2] = (TextView) getView().findViewById(R.id.thirdYr3);
-        thirdYr[3] = (TextView) getView().findViewById(R.id.thirdYr4);
-        thirdYr[4] = (TextView) getView().findViewById(R.id.thirdYr5);
-        thirdYr[5] = (TextView) getView().findViewById(R.id.thirdYr6);
+        thirdYr[0] = (TextView) getView().findViewById(R.id.thirdYr0);
+        thirdYr[1] = (TextView) getView().findViewById(R.id.thirdYr1);
+        thirdYr[2] = (TextView) getView().findViewById(R.id.thirdYr2);
+        thirdYr[3] = (TextView) getView().findViewById(R.id.thirdYr3);
+        thirdYr[4] = (TextView) getView().findViewById(R.id.thirdYr4);
+        thirdYr[5] = (TextView) getView().findViewById(R.id.thirdYr5);
 
-        fourthYr[0] = (TextView) getView().findViewById(R.id.fourthYr1);
-        fourthYr[1] = (TextView) getView().findViewById(R.id.fourthYr2);
-        fourthYr[2] = (TextView) getView().findViewById(R.id.fourthYr3);
-        fourthYr[3] = (TextView) getView().findViewById(R.id.fourthYr4);
-        fourthYr[4] = (TextView) getView().findViewById(R.id.fourthYr5);
-        fourthYr[5] = (TextView) getView().findViewById(R.id.fourthYr6);
+        fourthYr[0] = (TextView) getView().findViewById(R.id.fourthYr0);
+        fourthYr[1] = (TextView) getView().findViewById(R.id.fourthYr1);
+        fourthYr[2] = (TextView) getView().findViewById(R.id.fourthYr2);
+        fourthYr[3] = (TextView) getView().findViewById(R.id.fourthYr3);
+        fourthYr[4] = (TextView) getView().findViewById(R.id.fourthYr4);
+        fourthYr[5] = (TextView) getView().findViewById(R.id.fourthYr5);
 
         new BackgroundTask().execute();
 
@@ -123,7 +123,7 @@ public class TimeFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             try {
-                target = "http://matched-excuses.000webhostapp.com/ListofSchedule.php?UserID=" + URLEncoder.encode(MainActivity.userID);
+                target = "http://matched-excuses.000webhostapp.com/ListofSchedule.php?userID=" + URLEncoder.encode(MainActivity.userID);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -166,18 +166,15 @@ public class TimeFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("response");
                 int temp = 0;
-                String courseSemester;
                 String courseName;
                 String courseTitle;
                 String courseCampus;
 
                 while (temp < jsonArray.length()) {
                     JSONObject object = jsonArray.getJSONObject(temp);
-                    courseSemester = object.getString("courseSemester");
                     courseName = object.getString("courseName");
                     courseTitle = object.getString("courseTitle");
                     courseCampus = object.getString("courseCampus");
-                    CoursesMain courses = new CoursesMain(courseSemester, courseName, courseTitle, courseCampus);
                     schedule.addSchedule(courseName, courseTitle, courseCampus);
                     temp++;
                 }
