@@ -61,6 +61,7 @@ public class CoursesMain {
         this.courseCampus = courseCampus;
     }
 
+
     public CoursesMain(String courseSemester, String courseName, String courseTitle, String courseSeats, String courseProf, String courseCampus) {
         this.courseSemester = courseSemester;
         this.courseName = courseName;

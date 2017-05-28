@@ -6,22 +6,19 @@
     <Button
         android:layout_width="65dp"
         android:layout_height="45dp"
-        android:text="Add"
+        android:text="Delete"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="#ffffff"
         android:background="@color/color3"
-        android:id="@+id/addButton"
+        android:id="@+id/deleteButton"
         android:layout_marginRight="12dp"
         android:layout_marginLeft="8dp"
         />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,13 +26,13 @@
             android:background="@color/color3">
 
             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Course Semester"
-            android:id="@+id/courseSemester"
-            android:layout_gravity="center"
-            android:padding="3dp"
-            android:textColor="#ffffff"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course Semester"
+                android:id="@+id/courseSemester"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:textColor="#ffffff"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,27 +52,8 @@
                 android:padding="3dp"
                 android:textColor="#ffffff"
                 android:textStyle="bold"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Professor Name"
-                android:id="@+id/courseProf"
-                android:layout_gravity="center"
-                android:padding="3dp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,8 +79,15 @@
                 android:padding="3dp"
                 android:textStyle="bold"
                 android:textColor="@color/color9"/>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Competition rate"
+                android:id="@+id/courseCompetition"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:textStyle="bold"
+                android:textColor="@color/color10"/>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
