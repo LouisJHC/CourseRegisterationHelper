@@ -3,12 +3,27 @@ package com.greatcoding.android.courseregisterationhelper;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -61,6 +76,98 @@ public class StatFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         }
+
+    private ListView coursesListView;
+    private StatisticsListAdapter adapter;
+    private List<CoursesMain> coursesList;
+    int totalCourses = 0;
+
+    @Override
+    public void onActivityCreated(Bundle b){
+        super.onActivityCreated(b);
+        coursesListView = (ListView) getView().findViewById(R.id.coursesListView);
+        coursesList = new ArrayList<CoursesMain>();
+        adapter = new StatisticsListAdapter(getContext().getApplicationContext(), coursesList, this);
+        coursesListView.setAdapter(adapter);
+        new BackgroundTask().execute();
+    }
+
+    class BackgroundTask extends AsyncTask<Void, Void, String> {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                target = "http://matched-excuses.000webhostapp.com/Statistics.php?userID=" + URLEncoder.encode(MainActivity.userID);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String temp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((temp = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(temp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values) {
+            super.onProgressUpdate();
+        }
+
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("response");
+                int temp = 0;
+                String courseSemester;
+                String courseName;
+                String courseTitle;
+                String courseSeats;
+                String courseCampus;
+
+                while (temp < jsonArray.length()) {
+                    JSONObject object = jsonArray.getJSONObject(temp);
+                    courseSemester = object.getString("courseSemester");
+                    courseName = object.getString("courseName");
+                    courseTitle = object.getString("courseTitle");
+                    courseSeats = object.getString("courseSeats");
+                    courseCampus = object.getString("courseCampus");
+                    coursesList.add(new CoursesMain(courseSemester, courseName, courseTitle, courseSeats, courseCampus));
+                    temp++;
+                }
+                adapter.notifyDataSetChanged();
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
 
     @Override

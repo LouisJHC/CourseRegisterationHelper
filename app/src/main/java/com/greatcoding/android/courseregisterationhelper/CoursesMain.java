@@ -12,7 +12,6 @@ public class CoursesMain {
     String courseSeats;
     String courseProf;
     String courseCampus;
-
     public String getCourseSemester() {
         return courseSemester;
     }
@@ -78,5 +77,13 @@ public class CoursesMain {
             this.courseCampus = courseCampus;
 
 
+    }
+
+    public CoursesMain(String courseSemester, String courseName, String courseTitle, String courseSeats, String courseCampus) {
+        this.courseSemester = courseSemester;
+        this.courseName = courseName;
+        this.courseTitle = courseTitle;
+        this.courseSeats = courseSeats;
+        this.courseCampus = courseCampus;
     }
 }

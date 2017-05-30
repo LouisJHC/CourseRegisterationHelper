@@ -50,7 +50,7 @@
 
             <Button
                 android:layout_height="40dp"
-                android:background="@color/color5"
+                android:background="@color/color4"
                 android:text="Check"
                 android:textSize="15dp"
                 android:layout_gravity="center"
