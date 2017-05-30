@@ -80,7 +80,7 @@ public class StatFragment extends Fragment {
     private ListView coursesListView;
     private StatisticsListAdapter adapter;
     private List<CoursesMain> coursesList;
-    int totalCourses = 0;
+
 
     @Override
     public void onActivityCreated(Bundle b){

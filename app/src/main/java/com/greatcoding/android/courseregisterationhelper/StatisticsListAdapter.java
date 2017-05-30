@@ -110,6 +110,49 @@ public class StatisticsListAdapter extends BaseAdapter {
 
 
         v.setTag(coursesList.get(position).getCourseName());
+
+
+        Button deleteButton = (Button) v.findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String userID = MainActivity.userID;
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
+                                AlertDialog dialog = builder.setMessage("The following course is successfully removed from the schedule.").setPositiveButton("Confirm", null).create();
+                                dialog.show();
+                                coursesList.remove(position);
+                                notifyDataSetChanged();
+
+
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
+                                AlertDialog dialog = builder.setMessage("The following has not been removed.").setNegativeButton("Confirm", null).create();
+                                dialog.show();
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                };
+                DeleteRequest deleteRequest = new DeleteRequest(userID, coursesList.get(position).getCourseName() + "", responseListener);
+                RequestQueue queue = Volley.newRequestQueue(parent.getContext());
+                queue.add(deleteRequest);
+
+
+            }
+
+        });
+
+
         return v;
     }
 }
