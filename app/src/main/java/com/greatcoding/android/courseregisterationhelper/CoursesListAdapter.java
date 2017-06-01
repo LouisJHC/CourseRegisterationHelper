@@ -75,7 +75,11 @@ public class CoursesListAdapter extends BaseAdapter {
         courseSemester.setText(courseList.get(position).getCourseSemester());
         courseName.setText(courseList.get(position).getCourseName());
         courseTitle.setText(courseList.get(position).getCourseTitle());
-        courseProf.setText(courseList.get(position).getCourseProf());
+        if(courseList.get(position).getCourseProf().equals("")){
+            courseProf.setText("N/A");
+        }else{
+            courseProf.setText(courseList.get(position).getCourseProf());
+        }
         courseSeats.setText(courseList.get(position).getCourseSeats());
         courseCampus.setText(courseList.get(position).getCourseCampus());
 

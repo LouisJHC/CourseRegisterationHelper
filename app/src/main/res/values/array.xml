@@ -76,5 +76,12 @@
         <item>Fall 2017</item>
     </string-array>
 
+    <string-array name="ranking">
+        <item>From all major</item>
+        <item>From my major</item>
+        <item>Men</item>
+        <item>Women</item>
+    </string-array>
+
 
 </resources>

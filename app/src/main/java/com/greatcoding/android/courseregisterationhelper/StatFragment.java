@@ -9,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -81,6 +84,14 @@ public class StatFragment extends Fragment {
     private StatisticsListAdapter adapter;
     private List<CoursesMain> coursesList;
 
+    private ArrayAdapter rankingAdapter;
+    private Spinner rankingSpinner;
+
+    private ListView rankingListView;
+    private RankingListAdapter rankingListAdapter;
+    private List<CoursesMain> rankingList;
+
+
 
     @Override
     public void onActivityCreated(Bundle b){
@@ -90,6 +101,111 @@ public class StatFragment extends Fragment {
         adapter = new StatisticsListAdapter(getContext().getApplicationContext(), coursesList, this);
         coursesListView.setAdapter(adapter);
         new BackgroundTask().execute();
+        rankingSpinner = (Spinner) getView().findViewById(R.id.rankingSpinner);
+        rankingAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.ranking, R.layout.spinner_items);
+        rankingSpinner.setAdapter(rankingAdapter);
+        rankingSpinner.setPopupBackgroundResource(R.color.color3);
+
+        rankingListView = (ListView) getView().findViewById(R.id.rankingListView);
+        rankingList = new ArrayList<CoursesMain>();
+        rankingListAdapter = new RankingListAdapter(getContext().getApplicationContext(), rankingList, this);
+        rankingListView.setAdapter(rankingListAdapter);
+        new FromAllMajor().execute();
+        rankingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(rankingSpinner.getSelectedItem().equals("From all major")){
+
+                }else if((rankingSpinner.getSelectedItem().equals("From my major"))){
+
+                }else if((rankingSpinner.getSelectedItem().equals("Men"))){
+
+                }else if((rankingSpinner.getSelectedItem().equals("Women"))){
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+    class FromAllMajor extends AsyncTask<Void, Void, String> {
+        String target;
+
+        @Override
+        protected void onPreExecute() {
+            try {
+                target = "http://matched-excuses.000webhostapp.com/FromAllMajor.php";
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(target);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String temp;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((temp = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(temp + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            return null;
+        }
+
+        @Override
+        public void onProgressUpdate(Void... values) {
+            super.onProgressUpdate();
+        }
+
+
+        @Override
+        public void onPostExecute(String result) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("response");
+                int temp = 0;
+                String courseSemester;
+                String courseName;
+                String courseTitle;
+                String courseProf;
+                String courseSeats;
+                String courseCampus;
+
+                while (temp < jsonArray.length()) {
+                    JSONObject object = jsonArray.getJSONObject(temp);
+                    courseSemester = object.getString("courseSemester");
+                    courseName = object.getString("courseName");
+                    courseTitle = object.getString("courseTitle");
+                    courseProf = object.getString("courseProf");
+                    courseSeats = object.getString("courseSeats");
+                    courseCampus = object.getString("courseCampus");
+                    rankingList.add(new CoursesMain(courseSemester, courseName, courseTitle, courseProf, courseSeats, courseCampus));
+                    temp++;
+                }
+                rankingListAdapter.notifyDataSetChanged();
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     class BackgroundTask extends AsyncTask<Void, Void, String> {
