@@ -46,6 +46,7 @@ public class CoursesListAdapter extends BaseAdapter {
         new BackgroundTask().execute();
     }
 
+
     @Override
     public int getCount() {
         return courseList.size();
@@ -71,10 +72,12 @@ public class CoursesListAdapter extends BaseAdapter {
         TextView courseSeats = (TextView) v.findViewById(R.id.courseSeats);
         TextView courseCampus = (TextView) v.findViewById(R.id.courseCampus);
 
+
         courseTitle.setText(courseList.get(position).getCourseTitle());
+
         courseSemester.setText(courseList.get(position).getCourseSemester());
         courseName.setText(courseList.get(position).getCourseName());
-        courseTitle.setText(courseList.get(position).getCourseTitle());
+
         if(courseList.get(position).getCourseProf().equals("")){
             courseProf.setText("N/A");
         }else{
@@ -115,6 +118,8 @@ public class CoursesListAdapter extends BaseAdapter {
                     }
 
                 };
+
+
                 AddRequest addRequest = new AddRequest(userID, courseList.get(position).getCourseName() + "", responseListener);
                 RequestQueue queue = Volley.newRequestQueue(parent.getContext());
                 queue.add(addRequest);

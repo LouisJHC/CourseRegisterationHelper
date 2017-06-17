@@ -73,7 +73,7 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="25dp"
                 android:layout_gravity="center"
-                android:src="@drawable/sfu_logo"/>
+                android:src="@drawable/sfulogo"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,6 +83,13 @@
                 android:textSize="20dp"
                 android:layout_marginTop="15dp"/>
             </LinearLayout>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:divider="#ffffff"
+                android:id="@+id/noticeListView"
+                android:dividerHeight="10dp"></ListView>
         </LinearLayout>
 
 

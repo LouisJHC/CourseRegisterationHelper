@@ -105,6 +105,7 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton courseButton = (RadioButton) getView().findViewById(checkedId);
+
                 courseSchool = courseButton.getText().toString();
 
                     majAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.courses, android.R.layout.simple_spinner_dropdown_item);
@@ -176,6 +177,7 @@ public class CoursesFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+
     class BackgroundTask extends AsyncTask<Void, Void, String>
     {
         String target;
@@ -193,6 +195,7 @@ public class CoursesFragment extends Fragment {
 
         @Override
         protected String doInBackground(Void... voids){
+
             try{
                 URL url = new URL(target);
                 HttpURLConnection httpURLConnection= (HttpURLConnection) url.openConnection();
@@ -224,6 +227,7 @@ public class CoursesFragment extends Fragment {
         @Override
         public void onPostExecute(String result){
             try{
+
                 coursesList.clear();
                 JSONObject jsonObject = new JSONObject(result);
                 JSONArray jsonArray = jsonObject.getJSONArray("response");
@@ -234,6 +238,7 @@ public class CoursesFragment extends Fragment {
                 String courseSeats;
                 String courseProf;
                 String courseCampus;
+
 
                 while(temp < jsonArray.length()){
                     JSONObject object = jsonArray.getJSONObject(temp);

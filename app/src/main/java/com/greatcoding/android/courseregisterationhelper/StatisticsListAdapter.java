@@ -47,7 +47,9 @@ public class StatisticsListAdapter extends BaseAdapter {
         this.parent = parent;
     }
 
-
+    //I have defined the parse function seperately because the columns in my database
+    //is saved as String with the fraction so for example, if there are 5 people enrolled and 100 seats
+    //then the courseSeats column has 5/100 as string. I need to parse it.
     public double parse(String rate) {
         if (rate.contains("/")) {
             String[] rate1 = rate.split("/");
@@ -75,6 +77,7 @@ public class StatisticsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
+        //I have to inflate the view
         View v = View.inflate(context, R.layout.statisticsmain, null);
         TextView courseSemester = (TextView) v.findViewById(R.id.courseSemester);
         TextView courseName = (TextView) v.findViewById(R.id.courseName);

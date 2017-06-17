@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout linear;
@@ -17,10 +21,27 @@ public class MainActivity extends AppCompatActivity {
     TimeFragment fragment2;
     StatFragment fragment3;
     public static String userID;
+    private ListView noticeListView;
+    private NoticeListAdapter adapter;
+    private List<Notice> noticeList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        noticeListView = (ListView) findViewById(R.id.noticeListView);
+        noticeList = new ArrayList<Notice>();
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        noticeList.add(new Notice("This is a notice.", "By Louis", "June/14/2017"));
+        adapter = new NoticeListAdapter(getApplicationContext(), noticeList);
+        noticeListView.setAdapter(adapter);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         coursesButton = (Button) findViewById(R.id.coursesButton);

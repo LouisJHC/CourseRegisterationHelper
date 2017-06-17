@@ -12,6 +12,7 @@ public class CoursesMain {
     String courseSeats;
     String courseProf;
     String courseCampus;
+
     public String getCourseSemester() {
         return courseSemester;
     }

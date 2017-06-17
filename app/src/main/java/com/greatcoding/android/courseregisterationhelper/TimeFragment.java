@@ -81,7 +81,6 @@ public class TimeFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle b){
         super.onActivityCreated(b);
-
         firstYr[0] = (TextView) getView().findViewById(R.id.firstYr0);
         firstYr[1] = (TextView) getView().findViewById(R.id.firstYr1);
         firstYr[2] = (TextView) getView().findViewById(R.id.firstYr2);
@@ -176,6 +175,7 @@ public class TimeFragment extends Fragment {
                     courseTitle = object.getString("courseTitle");
                     courseCampus = object.getString("courseCampus");
                     schedule.addSchedule(courseName, courseTitle, courseCampus);
+                    //adding schedule to the timetable
                     temp++;
                 }
 

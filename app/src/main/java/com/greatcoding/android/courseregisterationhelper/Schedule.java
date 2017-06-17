@@ -20,8 +20,6 @@ public class Schedule {
             secondYr[i] = "";
             thirdYr[i] = "";
             fourthYr[i] = "";
-
-
         }
 
     }
